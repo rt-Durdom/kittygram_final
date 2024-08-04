@@ -12,7 +12,7 @@ services:
     volumes:
       - kittygram_data:/var/lib/postgresql/data
   backend:
-    build: ./backend/
+    image: rt4otohub/kittygram_backend
     env_file: .env
     depends_on:
       - db
@@ -21,13 +21,12 @@ services:
       - media:/media
   frontend:
     env_file: .env
-    build: ./frontend/
+    image: rt4otohub/kittygram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
-
   nginx:
-    build: ./nginx/
+    image: rt4otohub/kittygram_nginx
     env_file: .env
     ports:
       - 9000:80
